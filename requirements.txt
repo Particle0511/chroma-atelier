@@ -1,0 +1,10 @@
+flask
+flask-cors
+gunicorn
+scikit-learn
+pandas
+numpy
+joblib
+pytest
+black
+streamlit

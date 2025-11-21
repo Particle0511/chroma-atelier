@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chroma | Digital Atelier</title>
+    <!-- Import High-End Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Outfit:wght@200..600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    
+    <!-- Dynamic Layers -->
+    <div id="fusionBg" class="fusion-bg"></div>
+    <div class="noise-overlay"></div>
+    <div class="vignette"></div>
+
+    <main class="art-studio">
+        <header class="fade-in">
+            <div class="meta-line">EST. 2025 • DIGITAL ATELIER</div>
+            <h1 class="brand-title">CHROMA STUDIO</h1>
+            <h2 id="mainHeading" class="artistic-sub">The Muse</h2>
+        </header>
+
+        <div class="interaction-area fade-in delay-1">
+            <div class="input-container">
+                <input type="text" id="queryInput" placeholder="Describe your dream..." autocomplete="off">
+                <div class="input-line"></div>
+            </div>
+            
+            <button id="generateBtn" onclick="generatePalette()">
+                <span>Ignite Imagination</span>
+            </button>
+        </div>
+
+        <div id="loader" class="loader hidden">
+            <div class="loading-text">Mixing Colors...</div>
+            <div class="loading-bar"><div class="progress"></div></div>
+        </div>
+
+        <!-- The Palette Gallery -->
+        <section id="paletteContainer" class="gallery-grid"></section>
+    </main>
+
+    <div id="toast" class="toast">Color Code Copied</div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
