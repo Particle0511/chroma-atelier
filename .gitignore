@@ -2,4 +2,5 @@ venv/
 __pycache__/
 *.pyc
 .pytest_cache/
+ml_engine/artifacts/palette_model.pkl
 .DS_Store
