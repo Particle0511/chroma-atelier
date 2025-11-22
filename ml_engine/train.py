@@ -11,21 +11,21 @@ def train_model():
     if not os.path.exists(ARTIFACTS_DIR):
         os.makedirs(ARTIFACTS_DIR)
 
-    # 1. Generate MASSIVE Database (20,000 samples)
+    
     print("1. Generating Palette Database (20,000 samples)...")
     df = generate_synthetic_data(num_samples=20000)
     
     text_data = df['input_text']
-    # Grab only the color columns to store as the "Answer Key"
+   
     color_cols = [c for c in df.columns if c.startswith('color_')]
     palette_data = df[color_cols].values
 
-    # 2. Vectorize Text (Convert words to semantic numbers)
+    
     print("2. Vectorizing Descriptions...")
     vectorizer = TfidfVectorizer(ngram_range=(1, 2), stop_words='english')
     text_vectors = vectorizer.fit_transform(text_data)
 
-    # 3. Build Search Engine (Cosine Similarity)
+    
     print("3. Indexing Data...")
     nn_model = NearestNeighbors(
         n_neighbors=1, 
@@ -34,7 +34,7 @@ def train_model():
     )
     nn_model.fit(text_vectors)
 
-    # 4. Save Everything as a Bundle
+    
     artifact = {
         'vectorizer': vectorizer,
         'model': nn_model,

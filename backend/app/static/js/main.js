@@ -6,19 +6,18 @@ async function generatePalette() {
 
     if (!query) return;
 
-    // 1. Show Loader immediately
+    
     loader.classList.remove('hidden');
     
-    // 2. Clear previous palette immediately
+    
     container.innerHTML = '';
     container.style.opacity = '0';
     
-    // 3. Reset fusion/theme temporarily while thinking
+    
     resetFusion();
 
     try {
-        // 4. Artificial Delay (1.5s) + API Call (Parallel)
-        // This ensures the user SEES the loader for at least 1.5s
+        
         const minLoadingTime = new Promise(resolve => setTimeout(resolve, 1500));
         const apiCall = fetch('/generate', {
             method: 'POST',
@@ -26,13 +25,13 @@ async function generatePalette() {
             body: JSON.stringify({ query: query })
         });
 
-        // Wait for BOTH to finish
+        
         const [_, response] = await Promise.all([minLoadingTime, apiCall]);
 
         if (!response.ok) throw new Error('API Error');
         const data = await response.json();
         
-        // 5. Render & Activate
+        
         renderArtisticPalette(data.colors);
         activateFusion(data.colors);
 
@@ -81,7 +80,7 @@ function activateFusion(colors) {
     const fusionBg = document.getElementById('fusionBg');
     const subheading = document.getElementById('mainHeading');
     
-    // Gradient from Darkest (0) to Mid (2) to Lightest (4)
+   
     const gradient = `linear-gradient(135deg, ${colors[0].hex}, ${colors[2].hex}, ${colors[4].hex})`;
     
     fusionBg.style.background = gradient;
@@ -90,15 +89,13 @@ function activateFusion(colors) {
     subheading.style.backgroundImage = gradient;
     subheading.classList.add('dynamic-text');
 
-    // --- SMART CONTRAST CHECK ---
-    // Calculate brightness of the dominant background color (Index 0 & 2)
-    // If it's dark, switch text to white.
+    
     const hex = colors[2].hex.replace('#', '');
     const r = parseInt(hex.substr(0, 2), 16);
     const g = parseInt(hex.substr(2, 2), 16);
     const b = parseInt(hex.substr(4, 2), 16);
     
-    // Brightness formula
+    
     const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
 
     if (brightness < 128) {
@@ -115,7 +112,7 @@ function resetFusion() {
     fusionBg.classList.remove('active');
     subheading.classList.remove('dynamic-text');
     subheading.style.backgroundImage = 'none';
-    document.body.classList.remove('dark-theme'); // Reset to dark text on light paper
+    document.body.classList.remove('dark-theme'); 
 }
 
 function showToast(message) {

@@ -19,22 +19,22 @@ class PalettePredictor:
         if not self.artifact:
             return None
 
-        # Unpack the saved search engine
+     
         vectorizer = self.artifact['vectorizer']
         model = self.artifact['model']
         database_colors = self.artifact['data']
 
-        # 1. Convert user text to numbers
+        
         input_vector = vectorizer.transform([text_input])
 
-        # 2. Find the closest match (Cosine Search)
+      
         distances, indices = model.kneighbors(input_vector)
         
-        # 3. Retrieve the actual colors from that row
+        
         best_match_index = indices[0][0]
         prediction = database_colors[best_match_index]
         
-        # 4. Format for Frontend
+      
         colors = []
         for i in range(0, 15, 3):
             r = int(prediction[i])
